@@ -5,11 +5,11 @@ class ui.ChromelessPlayer extends BroadcastingDisplayObject {
   public static var LINKED:Boolean = Object.registerClass(PACKAGE,
                                                           ChromelessPlayer);
 
-  private static var PLAYER_URL:String = "http://www.youtube.com/apiplayer";
+  private static var PLAYER_URL:String = "http://www.youtube.com/apiplayer?t=" + (new Date()).getTime();
 
   private var player:MovieClip;
   private var loadInterval:Number;
-  
+
   function ChromelessPlayer () {
     super();
     
@@ -24,6 +24,7 @@ class ui.ChromelessPlayer extends BroadcastingDisplayObject {
     var t:ChromelessPlayer = this;
     var ytPlayerLoaderListener:Object = {
       onLoadInit: function() {
+        trace("file loaded...");
         // When the player clip first loads, we start an interval to
         // check for when the player is ready
         t.loadInterval = setInterval(function(){t.checkPlayerLoaded()}, 250);
@@ -38,23 +39,39 @@ class ui.ChromelessPlayer extends BroadcastingDisplayObject {
     ytPlayerLoader.loadClip(PLAYER_URL, player);
   }
 
-  function checkPlayerLoaded():Void {
+  private function checkPlayerLoaded():Void {
     // once the player is ready, we can subscribe to events, or in the case of
     // the chromeless player, we could load videos
-    if (player.isPlayerLoaded()) {
+    if (isPlayerLoaded()) {
+      trace("Player loaded.", this);
       player.addEventListener("onStateChange", onPlayerStateChange);
       player.addEventListener("onError", onPlayerError);
+      broadcastMessage(EVENT_LOAD);
       clearInterval(loadInterval);
-    } else {
-      player.setSize(200, 100);
+    }
+  }
+  
+  public function isPlayerLoaded():Boolean {
+    return player.isPlayerLoaded();
+  }
+
+  public function setSize(width:Number, height:Number):Void {
+    if (isPlayerLoaded()) {
+      player.setSize(width, height);
     }
   }
 
-  function onPlayerStateChange(newState:Number) {
+  public function cueVideoById(videoId:String):Void {
+    if (isPlayerLoaded()) {
+      player.cueVideoById(videoId);
+    }
+  }
+
+  public function onPlayerStateChange(newState:Number):Void {
     trace("New player state: "+ newState);
   }
 
-  function onPlayerError(errorCode:Number) {
+  public function onPlayerError(errorCode:Number):Void {
     trace("An error occurred: "+ errorCode);
   }
 }

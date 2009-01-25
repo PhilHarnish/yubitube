@@ -48,11 +48,9 @@ class util.Firebug {
   // Does its best to convert all sorts of data types into something JS can
   // handle. Almost a JSON serialize function in that its output is JSON-like
   // but still an object (not a string).
-  public static function objectify(obj:Object):Object {
-    // Handles all primitive values which can be "false". (or undefined!)
-    if (arguments.length > 1) {
-      return objectify(arguments);
-    }
+  public static function objectify(obj:Object,
+                                   opt_parent:Object,
+                                   opt_key:String):Object {
     var result:Object;
     var type:String = (obj instanceof Array) ? 'array' : String(typeof(obj));
     switch (type) {
@@ -77,6 +75,17 @@ class util.Firebug {
         return obj;
       break;
 
+      case 'function':
+        var code:Number = -1;
+        if (opt_key.substr(0, 3) == 'get') {
+          code = opt_key.charCodeAt(3);          
+        } else if (opt_key.substr(0, 2) == 'is') {
+          code = opt_key.charCodeAt(2);
+        }
+        if (code >= "A".charCodeAt(0) && code <= "Z".charCodeAt(0)) {
+          // Looks like a getter function
+          return objectify(opt_parent[opt_key]());
+        }
       default:
         return obj.toString();
       break;
@@ -91,7 +100,7 @@ class util.Firebug {
     // Arrays and Objects come here: though they can be printed there may be
     //  entries which cannot be printed.
     for (var key:String in obj) {
-      result[key] = objectify(obj[key]);
+      result[key] = objectify(obj[key], obj, key);
     }
 
     // Unpollute the input.

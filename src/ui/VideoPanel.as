@@ -6,11 +6,44 @@ class ui.VideoPanel extends BroadcastingDisplayObject {
   public static var LINKED:Boolean = Object.registerClass(PACKAGE, VideoPanel);
 
   private var videoPlayer:ChromelessPlayer;
+  private var videoId:String;
+  private var active:Boolean;
+  private var width:Number;
+  private var height:Number;
 
   function VideoPanel () {
     super();
+
+    width = 320;
+    height = 240;
+
     videoPlayer = ChromelessPlayer(attachMovie(ChromelessPlayer.PACKAGE,
                                                "mainDisplay",
                                                1));
+    videoPlayer.addListener(this);
+    setActive(false);
   }
+
+  public function init(id:String):Void {
+    trace("Loading ", id);
+    videoId = id;
+  }
+
+  public function setSize(newWidth:Number, newHeight:Number):Void {
+    width = newWidth;
+    height = newHeight;
+    videoPlayer.setSize(width, height);
+  }
+
+  public function setActive(state:Boolean):Void {
+    active = state;
+    _visible = Boolean(videoPlayer.isPlayerLoaded() && active);
+  }
+
+  public function onDisplayLoad():Void {
+    videoPlayer.setSize(width, height);
+    setActive(active);
+    videoPlayer.cueVideoById(videoId);
+  }
+
 }
