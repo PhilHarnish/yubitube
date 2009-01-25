@@ -2,9 +2,9 @@
  * YubiTube player
  */
 
+import model.PlayerData;
+import model.VideoData;
 import ui.VideoPanel;
-import util.PlayerData;
-import util.VideoData;
 
 class ui.YubiTube extends MovieClip {
   public static var PACKAGE:String = "__Packages.ui.YubiTube";
