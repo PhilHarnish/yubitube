@@ -1,0 +1,7 @@
+YūbiTube
+
+YūbiTube is a YouTube video player built using public APIs. One of the goals of
+this project is to extend the YouTube APIs when they are lacking and provide a
+testbed for when they are broken.
+
+Yūbi is Japanese and means "elegant" or "graceful". Yubi also means finger.
