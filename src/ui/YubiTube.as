@@ -26,7 +26,7 @@ class ui.YubiTube extends MovieClip {
 
   public function setPlayerData(data:PlayerData):Void {
     playerData = data;
-    
+    trace("data: ", playerData);
     queueVideos(playerData.playlist.getVideoData());
   }
 
