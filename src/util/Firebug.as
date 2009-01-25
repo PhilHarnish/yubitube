@@ -33,7 +33,7 @@ class util.Firebug {
     }
     if (ExternalInterface.available) {
       ExternalInterface.call("trace", objectify(arguments));
-    } else {
+    } else if (trace != Firebug.out) {
       // Remove output type from args.
       arguments.shift();
       trace(type + ": " + arguments.join(', '));
@@ -54,7 +54,7 @@ class util.Firebug {
       return objectify(arguments);
     }
     var result:Object;
-    var type:String = String(typeof(obj));
+    var type:String = (obj instanceof Array) ? 'array' : String(typeof(obj));
     switch (type) {
       case 'array':
         result = [];

@@ -3,13 +3,15 @@
  */
 
 import ui.YubiTube;
+import util.PlayerData;
 
 class Main {
 
   static function main(mc:MovieClip):Void {
-    trace("YubiTube player.");
+    trace("YubiTube player.", mc);
     Stage.scaleMode = "noscale";
     Stage.align = "TL";
-    mc.attachMovie(YubiTube.PACKAGE, "app", 1);
+    var app:YubiTube = YubiTube(mc.attachMovie(YubiTube.PACKAGE, "app", 1));
+    app.setPlayerData(new PlayerData(mc));
   }
 }

@@ -6,7 +6,6 @@ class ui.ChromelessPlayer extends BroadcastingDisplayObject {
                                                           ChromelessPlayer);
 
   private static var PLAYER_URL:String = "http://www.youtube.com/apiplayer";
-  private static var BASE_PARAMS:String = "enablejsapi=1";
 
   private var player:MovieClip;
   private var loadInterval:Number;
@@ -25,7 +24,6 @@ class ui.ChromelessPlayer extends BroadcastingDisplayObject {
     var t:ChromelessPlayer = this;
     var ytPlayerLoaderListener:Object = {
       onLoadInit: function() {
-        trace("Um?");
         // When the player clip first loads, we start an interval to
         // check for when the player is ready
         t.loadInterval = setInterval(function(){t.checkPlayerLoaded()}, 250);
@@ -37,28 +35,26 @@ class ui.ChromelessPlayer extends BroadcastingDisplayObject {
     ytPlayerLoader.addListener(ytPlayerLoaderListener);
 
     // load the player
-    trace("?", ytPlayerLoader.loadClip("http://www.youtube.com/apiplayer?enablejsapi=1", player));
+    ytPlayerLoader.loadClip(PLAYER_URL, player);
   }
 
   function checkPlayerLoaded():Void {
     // once the player is ready, we can subscribe to events, or in the case of
     // the chromeless player, we could load videos
     if (player.isPlayerLoaded()) {
-      trace("Player loaded!");
       player.addEventListener("onStateChange", onPlayerStateChange);
       player.addEventListener("onError", onPlayerError);
       clearInterval(loadInterval);
     } else {
-      trace("no...", player.isPlayerLoaded, player.isPlayerLoaded(), player.seekTo, player.pauseVideo);
       player.setSize(200, 100);
     }
   }
 
   function onPlayerStateChange(newState:Number) {
-      trace("New player state: "+ newState);
+    trace("New player state: "+ newState);
   }
 
   function onPlayerError(errorCode:Number) {
-      trace("An error occurred: "+ errorCode);
+    trace("An error occurred: "+ errorCode);
   }
 }
