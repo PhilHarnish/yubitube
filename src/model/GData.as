@@ -1,3 +1,9 @@
+/**
+ * Makes requests to the YouTube GData feeds.
+ * request() is called which will call "onLoad" on each of it's subscribers.
+ * The toObject method is provided to convert the XML data into something easier
+ * to navigate.
+ */
 
 class model.GData extends XML {
   private static var BASE_URL:String = "http://gdata.youtube.com";
@@ -10,6 +16,16 @@ class model.GData extends XML {
   public var addListener:Function;
   public var broadcastMessage:Function;
 
+  /**
+   * Given an XMLNode an easy to navigate object is returned.
+   *
+   * Example:
+   * <root>
+   *   <list><a>1</a><a>2</a><b attr="b node"></list>
+   * </root>
+   * Becomes:
+   * {root: {list: {a: [{value:1}, {value:2}], b: {attr:"b node"}}}}
+   */
   public static function toObject(xml:XMLNode):Object {
     var result = {};
 
@@ -39,6 +55,14 @@ class model.GData extends XML {
     return result;
   }
 
+  /**
+   * method is an absolute path to the GData request path
+   * (ex: "/feeds/api/videos/")
+   * opt_arguments are additional url parameters
+   * (ex: {v: 2})
+   *
+   * When the load completes, calls onLoad in subscribed listners.
+   */
   public function request(method:String, opt_arguments:Object):Boolean {
     var args:String;
     if (opt_arguments) {

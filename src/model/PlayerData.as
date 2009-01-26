@@ -2,6 +2,10 @@
 import model.Playlist;
 import model.VideoData;
 
+/**
+ * Configuration data relevant to a YubiTube player.
+ */
+
 class model.PlayerData {
 
   public var playlist:Playlist;
