@@ -7,6 +7,12 @@ class ui.BroadcastingDisplayObject extends MovieClip {
   function BroadcastingDisplayObject() {
     AsBroadcaster.initialize(this);
   }
+  
+  public function bind (thisObj:Object, func:Function):Function {
+    return function() {
+      func.apply(thisObj, arguments);
+    }
+  }
 
   public var addListener:Function;
 

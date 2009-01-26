@@ -1,3 +1,5 @@
+
+import model.VideoData;
 import ui.BroadcastingDisplayObject;
 import ui.ChromelessPlayer;
 
@@ -35,9 +37,27 @@ class ui.VideoPanel extends BroadcastingDisplayObject {
     videoPlayer.setSize(width, height);
   }
 
+  public function getSize():/*Number*/Array {
+    var r:/*Number*/Array = [width, height];
+    return r;
+  }
+
+  public function getVideoSize():/*Number*/Array {
+    return videoPlayer.getVideoSize();
+  }
+
   public function setActive(state:Boolean):Void {
     active = state;
     _visible = Boolean(videoPlayer.isPlayerLoaded() && active);
+    if (active) {
+      VideoData.fromId(videoId).fetchMetadata();
+    }
+  }
+
+  public function playVideo():Void {
+    if (active) {
+      videoPlayer.playVideo();
+    }
   }
 
   public function onDisplayLoad():Void {

@@ -5,7 +5,7 @@ class ui.ChromelessPlayer extends BroadcastingDisplayObject {
   public static var LINKED:Boolean = Object.registerClass(PACKAGE,
                                                           ChromelessPlayer);
 
-  private static var PLAYER_URL:String = "http://www.youtube.com/apiplayer?t=" + (new Date()).getTime();
+  private static var PLAYER_URL:String = "http://www.youtube.com/apiplayer";
 
   private var player:MovieClip;
   private var loadInterval:Number;
@@ -44,8 +44,8 @@ class ui.ChromelessPlayer extends BroadcastingDisplayObject {
     // the chromeless player, we could load videos
     if (isPlayerLoaded()) {
       trace("Player loaded.", this);
-      player.addEventListener("onStateChange", onPlayerStateChange);
-      player.addEventListener("onError", onPlayerError);
+      player.addEventListener("onStateChange", bind(this, onPlayerStateChange));
+      player.addEventListener("onError", bind(this, onPlayerError));
       broadcastMessage(EVENT_LOAD);
       clearInterval(loadInterval);
     }
@@ -66,12 +66,24 @@ class ui.ChromelessPlayer extends BroadcastingDisplayObject {
       player.cueVideoById(videoId);
     }
   }
+  
+  public function playVideo():Void {
+    if (isPlayerLoaded()) {
+      player.playVideo();
+    }
+  }
+  
+  public function getVideoSize():/*Number*/Array {
+    var v:Object = player.loadClip.overallHolder.videoPlayer.videoDisplay.video;
+    var r:/*Number*/Array = [v.width, v.height];
+    return r;
+  }
 
   public function onPlayerStateChange(newState:Number):Void {
-    trace("New player state: "+ newState);
+    trace("New player state: ", newState, getVideoSize());
   }
 
   public function onPlayerError(errorCode:Number):Void {
-    trace("An error occurred: "+ errorCode);
+    trace("An error occurred: ", errorCode, this);
   }
 }
