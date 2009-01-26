@@ -37,7 +37,6 @@ class ui.YubiTube extends MovieClip {
     }
     for (var i = 0; i < count; i++) {
       var id:String = videos[i].videoId;
-      trace("Queue video", id);
       panels[id] = panels.attachMovie(VideoPanel.PACKAGE,
                                       id,
                                       panels.getNextHighestDepth());

@@ -27,7 +27,6 @@ class ui.VideoPanel extends BroadcastingDisplayObject {
   }
 
   public function init(id:String):Void {
-    trace("Loading ", id);
     videoId = id;
   }
 

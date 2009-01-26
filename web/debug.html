@@ -30,8 +30,8 @@ var trace = function (args) {
   var type = args.shift();
   var line = args.pop();
   var file = args.pop();
-  var func = args.pop();
-  args.unshift("[" + func + "@" + line + "]");
+  var func = args.pop().split('.').pop();
+  args.unshift("[" + func + ":", line, "]");
   console[type].apply(console, args);
 }
 var iterable = function (o) {

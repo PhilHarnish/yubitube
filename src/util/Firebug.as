@@ -2,7 +2,7 @@ import flash.external.ExternalInterface;
 
 class util.Firebug {
 
-  public static var depth:Number = 4;
+  public static var depth:Number = 10;
   public static var level:Number = 0;
   public static var types:Object = {
     debug: 0,
@@ -39,7 +39,6 @@ class util.Firebug {
     if (ExternalInterface.available) {
       var obj:Object = objectify(arguments, depth);
       ExternalInterface.call("trace", obj);
-      //ExternalInterface.call("console.log", stringify(obj));
     } else if (trace != Firebug.out) {
       // Remove output type from args.
       arguments.shift();
@@ -93,7 +92,8 @@ class util.Firebug {
         } else if (opt_key.substr(0, 2) == 'is') {
           code = opt_key.charCodeAt(2);
         }
-        if (code >= "A".charCodeAt(0) && code <= "Z".charCodeAt(0)) {
+        if (code >= "A".charCodeAt(0) && code <= "Z".charCodeAt(0) ||
+            opt_key == "toString") {
           // Looks like a getter function
           return objectify(opt_parent[opt_key](), 0);
         }
@@ -113,10 +113,7 @@ class util.Firebug {
     // Arrays and Objects come here: though they can be printed there may be
     //  entries which cannot be printed.
     for (var key:String in obj) {
-      result[filterKey(key)] = objectify(obj[key], opt_depth, obj, key);
-      if (result[key] == "TOO DEEP" || result[key] == "[type Function]") {
-        delete result[key];
-      }
+      result[filter(key)] = objectify(obj[key], opt_depth, obj, key);
     }
 
     // Unpollute the input.
@@ -126,38 +123,8 @@ class util.Firebug {
     return result;
   }
   
-  public static function stringify(obj:Object):String {
-    var result:String = '{\n';
-    var type:String = typeof(obj);
-    switch (type) {
-      case 'object':
-      break;
-      default:
-        return obj.toString();
-    }
-    for (var key:String in obj) {
-      result += key + ': ' + stringify(obj[key]) + ',\n';
-    }
-    return result + '}\n';
+  public static function filter(key:String):String {
+    return isNaN(key)? "'" + key + "'" : key;
   }
-  
-  public static function filterKey(key:String):String {
-    var filtered:String = '';
-    var length:Number = key.length;
-    var badString = false;
-    for (var i = 0; i < length; i++) {
-      var char:String = key.charAt(i);
-      switch (char) {
-        case ":":
-          badString = true;
-        //break;
-        default:
-          filtered += key.charAt(i);
-        break;
-      }
-    }
-    return badString? "'"+filtered+"'" : filtered;
-  }
-
 }
 
