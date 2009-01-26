@@ -5,6 +5,7 @@
 import model.PlayerData;
 import model.VideoData;
 import ui.VideoPanel;
+import util.TabStyleFactory;
 
 class ui.YubiTube extends MovieClip {
   public static var PACKAGE:String = "__Packages.ui.YubiTube";
@@ -26,6 +27,8 @@ class ui.YubiTube extends MovieClip {
 
   public function setPlayerData(data:PlayerData):Void {
     playerData = data;
+    TabStyleFactory.setDefaultColors(playerData.baseColor,
+                                     playerData.highlightColor);
     trace("data: ", playerData);
     queueVideos(playerData.playlist.getVideoData());
   }

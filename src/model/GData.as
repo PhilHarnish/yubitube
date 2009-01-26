@@ -23,11 +23,10 @@ class model.GData extends XML {
         var child:XMLNode = xml.childNodes[i];
         var nodeName = child.nodeName;
         if (result[nodeName]) {
-          if (result[nodeName] instanceof Array) {
-            result[nodeName].push(toObject(child));
-          } else {
+          if (!(result[nodeName] instanceof Array)) {
             result[nodeName] = [result[nodeName]];
           }
+          result[nodeName].push(toObject(child));
         } else {
           result[nodeName] = toObject(child);
         }

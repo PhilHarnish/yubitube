@@ -10,6 +10,7 @@ class model.PlayerData {
 
   function PlayerData (data:Object) {
     playlist = new Playlist(VideoData.fromIds(data.video_id.split(',')));
+
     baseColor = Number(data.color1) || baseColor;
     highlightColor = Number(data.color2) || highlightColor;
   }
