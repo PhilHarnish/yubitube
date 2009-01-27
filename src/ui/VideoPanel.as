@@ -13,13 +13,15 @@ class ui.VideoPanel extends BroadcastingDisplayObject {
   public static var LINKED:Boolean = Object.registerClass(PACKAGE, VideoPanel);
 
   private static var IMG_URL:String = "http://i.ytimg.com/vi/ID/hqdefault.jpg";
+  private static var WIDE_RECT:Rectangle = new Rectangle(0, 45, 480, 270);
+  private static var WIDE_TEST:Rectangle = new Rectangle(-1, 43, 482, 274);
   private static var IMG_WIDTH:Number = 480;
   private static var IMG_HEIGHT:Number = 360;
 
   private var videoPlayer:ChromelessPlayer;
   private var thumbnail:MovieClip;
   private var thumbnailImage:MovieClip;
-  private var thumbnailMask:MovieClip;  
+  private var thumbnailMask:MovieClip;
   private var videoId:String;
   private var active:Boolean;
   private var width:Number;
@@ -27,7 +29,7 @@ class ui.VideoPanel extends BroadcastingDisplayObject {
 
   function VideoPanel (style:TabStyleFactory) {
     super();
-    
+
     width = 320;
     height = 240;
 
@@ -36,7 +38,7 @@ class ui.VideoPanel extends BroadcastingDisplayObject {
                                                1));
     thumbnail = createEmptyMovieClip("thumbnail", 2);
     //thumbnail.filters = [TabStyleFactory.SMOOTH]
-    
+
     videoPlayer.addListener(this);
     videoPlayer._visible = false;
 
@@ -52,7 +54,7 @@ class ui.VideoPanel extends BroadcastingDisplayObject {
     thumbnailLoader.addListener(this);
     thumbnailLoader.loadClip(IMG_URL.split('ID').join(videoId), thumbnailImage);
   }
-  
+
   public function onLoadInit ():Void {
     trace("on load init..");
     var w = IMG_WIDTH;
@@ -66,29 +68,16 @@ class ui.VideoPanel extends BroadcastingDisplayObject {
     var maskMc:MovieClip = thumbnail.createEmptyMovieClip("maskMc", 3);
     var style:TabStyleFactory = new TabStyleFactory(maskMc);
     var maskRect:Rectangle = bmpData.getColorBoundsRect(0xFF000000, 0, false);
+    if (WIDE_TEST.containsRectangle(maskRect)) {
+      maskRect = WIDE_RECT;
+    }
+    trace("Rect", maskRect);
     thumbnailImage._y -= maskRect.y;
     maskRect.y = 0;
     style.setFill(0xFF0000).drawRect(maskRect);
     thumbnail.setMask(maskMc);
-
-    // Detect black bars
-    //trace("There were", y, "pixels of black color", bmpData.getPixel(5, y));
-    //var srcRect:Rectangle = detectImageWithoutBars(bmpData);
-    //var m:Matrix = new Matrix();
-    //m.translate(0, -srcRect.y);
-    //srcRect.y = 0;
-    //bmpData = new BitmapData(w, h, true, 0x000000); //true and 0 color allows for transparency
-    //bmpData.draw(thumbnail, new Matrix(), TabStyleFactory.NO_COLOR_TRANSFORM, "normal", srcRect);
-    
-    //bmpData.applyFilter(bmpData,
-    //                    bmpData.rectangle,
-    //                    TabStyleFactory.POINT_ORIGIN,
-    //                    TabStyleFactory.SMOOTHING_FILTER);
-    //var smooth = createEmptyMovieClip("smooth", getNextHighestDepth());
-    //smooth.attachBitmap(bmpData, 2, "auto", true); //true for SMOOTHING, ;)
-    //thumb.removeMovieClip();
   }
-  
+
   public function setSize(newWidth:Number, newHeight:Number):Void {
     width = newWidth;
     height = newHeight;
