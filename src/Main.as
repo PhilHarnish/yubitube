@@ -6,7 +6,7 @@ import model.PlayerData;
 import ui.YubiTube;
 
 class Main {
-  
+
   static var application:YubiTube;
 
   static function main(mc:MovieClip):Void {
@@ -16,10 +16,10 @@ class Main {
     Stage.addListener(Main);
     application = YubiTube(mc.attachMovie(YubiTube.PACKAGE, "app", 1));
     application.setPlayerData(new PlayerData(mc));
-    
+
     onResize();
   }
-  
+
   static function onResize():Void {
     application.onResize(Stage.width, Stage.height);
   }

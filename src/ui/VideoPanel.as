@@ -37,10 +37,9 @@ class ui.VideoPanel extends BroadcastingDisplayObject {
                                                "videoPlayer",
                                                1));
     thumbnail = createEmptyMovieClip("thumbnail", 2);
-    //thumbnail.filters = [TabStyleFactory.SMOOTH]
+    thumbnail.onRelease = bind(this, onThumbnailRelease);
 
     videoPlayer.addListener(this);
-    videoPlayer._visible = false;
 
     setActive(false);
   }
@@ -114,6 +113,12 @@ class ui.VideoPanel extends BroadcastingDisplayObject {
     videoPlayer.setSize(width, height);
     setActive(active);
     videoPlayer.cueVideoById(videoId);
+  }
+
+  private function onThumbnailRelease():Void {
+    trace("Playing...");
+    playVideo()
+    thumbnail._visible = false;
   }
 
 }
