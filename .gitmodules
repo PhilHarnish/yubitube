@@ -1,0 +1,3 @@
+[submodule "lib/asunit"]
+	path = lib/asunit
+	url = ../asunit.git
