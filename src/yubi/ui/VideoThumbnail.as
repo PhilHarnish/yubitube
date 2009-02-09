@@ -3,10 +3,10 @@ import flash.display.BitmapData;
 import flash.geom.Matrix;
 import flash.geom.Rectangle;
 
-import util.TabStyleFactory;
+import yubi.util.TabStyleFactory;
 
-class ui.VideoThumbnail extends MovieClip {
-  public static var PACKAGE:String = "__Packages.ui.VideoThumbnail";
+class yubi.ui.VideoThumbnail extends MovieClip {
+  public static var PACKAGE:String = "__Packages.yubi.ui.VideoThumbnail";
   public static var LINKED:Boolean = Object.registerClass(PACKAGE,
                                                           VideoThumbnail);
 

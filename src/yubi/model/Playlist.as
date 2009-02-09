@@ -1,7 +1,7 @@
 
-import model.VideoData;
+import yubi.model.VideoData;
 
-class model.Playlist {
+class yubi.model.Playlist {
 
   private var allData:/*VideoData*/Array;
   private var lastFilteredData:/*VideoData*/Array;

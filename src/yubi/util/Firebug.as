@@ -1,6 +1,6 @@
 import flash.external.ExternalInterface;
 
-class util.Firebug {
+class yubi.util.Firebug {
 
   public static var depth:Number = 10;
   public static var level:Number = 0;

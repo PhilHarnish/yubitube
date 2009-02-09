@@ -1,11 +1,11 @@
 
-import model.VideoData;
-import ui.BroadcastingDisplayObject;
-import ui.ChromelessPlayer;
-import ui.VideoThumbnail;
+import yubi.model.VideoData;
+import yubi.ui.BroadcastingDisplayObject;
+import yubi.ui.ChromelessPlayer;
+import yubi.ui.VideoThumbnail;
 
-class ui.VideoPanel extends BroadcastingDisplayObject {
-  public static var PACKAGE:String = "__Packages.ui.VideoPanel";
+class yubi.ui.VideoPanel extends BroadcastingDisplayObject {
+  public static var PACKAGE:String = "__Packages.yubi.ui.VideoPanel";
   public static var LINKED:Boolean = Object.registerClass(PACKAGE, VideoPanel);
 
   private var videoPlayer:ChromelessPlayer;

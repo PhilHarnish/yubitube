@@ -2,8 +2,8 @@
  * Entry point for YubiTube
  */
 
-import model.PlayerData;
-import ui.YubiTube;
+import yubi.model.PlayerData;
+import yubi.ui.YubiTube;
 
 class Main {
 

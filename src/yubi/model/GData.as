@@ -5,7 +5,7 @@
  * to navigate.
  */
 
-class model.GData extends XML {
+class yubi.model.GData extends XML {
   private static var BASE_URL:String = "http://gdata.youtube.com";
   private static var EVENT_LOAD:String = "onLoad";
 

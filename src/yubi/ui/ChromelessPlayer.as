@@ -1,7 +1,7 @@
-import ui.BroadcastingDisplayObject;
+import yubi.ui.BroadcastingDisplayObject;
 
-class ui.ChromelessPlayer extends BroadcastingDisplayObject {
-  public static var PACKAGE:String = "__Packages.ui.ChromelessPlayer";
+class yubi.ui.ChromelessPlayer extends BroadcastingDisplayObject {
+  public static var PACKAGE:String = "__Packages.yubi.ui.ChromelessPlayer";
   public static var LINKED:Boolean = Object.registerClass(PACKAGE,
                                                           ChromelessPlayer);
 

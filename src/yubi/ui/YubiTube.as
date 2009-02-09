@@ -2,13 +2,13 @@
  * YubiTube player
  */
 
-import model.PlayerData;
-import model.VideoData;
-import ui.VideoPanel;
-import util.TabStyleFactory;
+import yubi.model.PlayerData;
+import yubi.model.VideoData;
+import yubi.ui.VideoPanel;
+import yubi.util.TabStyleFactory;
 
-class ui.YubiTube extends MovieClip {
-  public static var PACKAGE:String = "__Packages.ui.YubiTube";
+class yubi.ui.YubiTube extends MovieClip {
+  public static var PACKAGE:String = "__Packages.yubi.ui.YubiTube";
   public static var LINKED:Boolean = Object.registerClass(PACKAGE, YubiTube);
 
   private var playerData:PlayerData;

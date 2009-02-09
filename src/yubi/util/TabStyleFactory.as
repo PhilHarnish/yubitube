@@ -10,7 +10,7 @@ import flash.geom.ColorTransform;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
-class util.TabStyleFactory {
+class yubi.util.TabStyleFactory {
   
   public static var POINT_ORIGIN:Point = new Point(0, 0);
   public static var SMOOTH:BlurFilter = new BlurFilter(1.1, 1.1, 2);

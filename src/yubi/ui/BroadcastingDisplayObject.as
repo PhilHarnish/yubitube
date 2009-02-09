@@ -1,5 +1,5 @@
 
-class ui.BroadcastingDisplayObject extends MovieClip {
+class yubi.ui.BroadcastingDisplayObject extends MovieClip {
   
   static var EVENT_LOAD:String = "onDisplayLoad"
   static var EVENT_UPDATE:String = "onDisplayUpdate"

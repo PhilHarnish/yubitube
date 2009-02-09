@@ -1,7 +1,7 @@
 
-import model.GData;
+import yubi.model.GData;
 
-class model.VideoData {
+class yubi.model.VideoData {
   private static var FEED_METHOD:String = "/feeds/api/videos/";
   private static var FEED_ARGUMENTS:Object = {v: 2};
   
