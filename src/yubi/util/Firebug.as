@@ -24,7 +24,6 @@ class yubi.util.Firebug {
   }
 
   public static function out():Void {
-    
     var type:String = arguments[0];
     // out expects "warn", "info", etc as first argument.
     if (types[type] == undefined) {

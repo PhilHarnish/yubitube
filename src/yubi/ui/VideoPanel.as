@@ -57,7 +57,7 @@ class yubi.ui.VideoPanel extends BroadcastingDisplayObject {
 
   public function setActive(state:Boolean):Void {
     active = state;
-    _visible = true;//Boolean(videoPlayer.isPlayerLoaded() && active);
+    _visible = Boolean(videoPlayer.isPlayerLoaded() && active);
     if (active) {
       VideoData.fromId(videoId).fetchMetadata();
     }

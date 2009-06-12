@@ -7,7 +7,7 @@ test*)
   MAIN="AllTests.as"
   ;;
 *)
-  CP=""
+  CP="yubi/util/Firebug.as"
   OUT="../web/latest.swf"
   MAIN="Main.as"
   ;;

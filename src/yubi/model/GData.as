@@ -77,6 +77,6 @@ class yubi.model.GData extends XML {
 
   public function onLoad(success:Boolean):Void {
     broadcastMessage(EVENT_LOAD, success, this);
-    trace("Loaded XML data", success, toObject(this));
+    trace("Loaded XML data", success, "before:", this, "after:", toObject(this));
   }
 }

@@ -50,6 +50,7 @@ class yubi.ui.VideoThumbnail extends MovieClip {
     if (opt_type) {
       type = opt_type;
     }
+    _alpha = 0;
     
     load(opt_crop);
   }

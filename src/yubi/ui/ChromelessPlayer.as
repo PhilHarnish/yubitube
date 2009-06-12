@@ -5,7 +5,7 @@ class yubi.ui.ChromelessPlayer extends BroadcastingDisplayObject {
   public static var LINKED:Boolean = Object.registerClass(PACKAGE,
                                                           ChromelessPlayer);
 
-  private static var PLAYER_URL:String = "http://www.youtube.com/apiplayer";
+  private static var PLAYER_URL:String = "http://www.youtube.com/apiplayer?el=test";
 
   private var player:MovieClip;
   private var loadInterval:Number;
